@@ -29,29 +29,15 @@ function parseComponent(component, componentName) {
 
 function parseChild(coms, preName) {
   if (coms) {
-    if (_.isArray(coms)) {
-      coms.forEach(it => {
-        const itPreCreated = it.created || new Function()
-        const nowName =  it.vuetrol || `${preName}_${it.name}`
-        it.created = function() {
-          setGlobal(nowName, this)
-          return itPreCreated(...arguments)
-        }
-        parseChild(it.components, nowName)
-      })
-    }
-    if (_.isObject(coms)) {
-      Object.keys(coms).forEach(it => {
-        const itPreCreated = coms[it].created || new Function()
-        const nowName =  coms[it].vuetrol || `${preName}_${it}`
-        coms[it].created = function() {
-          setGlobal(nowName, this)
-          return itPreCreated(...arguments)
-        }
-        parseChild(coms[it].components, nowName)
-      })
-    }
-    
+    Object.keys(coms).forEach(it => {
+      const itPreCreated = coms[it].created || new Function()
+      const nowName =  coms[it].vuetrol || `${preName}_${it}`
+      coms[it].created = function() {
+        setGlobal(nowName, this)
+        return itPreCreated(...arguments)
+      }
+      parseChild(coms[it].components, nowName)
+    })
   }
 }
 
