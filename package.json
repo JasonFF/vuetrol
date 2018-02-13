@@ -1,9 +1,9 @@
 {
   "name": "vuetrol",
-  "version": "1.0.0",
+  "version": "1.0.01",
   "description": "A Vue.js project",
   "author": "JasonFF <dfQ_Qjb@qq.com>",
-  "private": true,
+  "license": "",
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",

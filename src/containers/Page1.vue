@@ -18,7 +18,6 @@ const Page1 = {
   vuetrol: 'Page1',
   name: 'Page1',
   mounted() {
-    console.log(this)
   }
 }
 export default controller('Page1')(Page1)
