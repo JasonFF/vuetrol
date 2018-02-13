@@ -8,19 +8,19 @@
 </template>
 <script>
 import store from '@/vuetrol/index'
-const Component3 = store.get('Page1_Component2_Component3')
+const cm3 = store.get('cm3')
 
 export default {
   name: 'Component4',
   methods: {
     add() {
-      Component3().add()
+      cm3().add()
     },
     minus() {
-      Component3().minus()
+      cm3().minus()
     },
     addIfOdd() {
-      Component3().addIfOdd()
+      cm3().addIfOdd()
     }
   }
 }

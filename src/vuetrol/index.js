@@ -1,18 +1,30 @@
 import _ from 'lodash'
 
-const global = {
-  get(str) {
-    return () => _.get(this, str)
+function Store() {
+
+}
+Store.prototype.get = function(str) {
+  return () => _.get(this, str)
+}
+
+const global = new Store()
+
+function setGlobal(name, vom) {
+  if(_.get(global, name)) {
+    console.warn("vuetrol 命名冲突")
   }
+  _.set(global, name, vom)
+  console.log("store", global)
 }
 
 function parseComponent(component, componentName) {
   const preCreated = component.created || new Function()
+  const vuetrolName = component.vuetrol || componentName
   component.created = function() {
-    _.set(global, componentName, this)
+    setGlobal(vuetrolName, this)
     return preCreated(...arguments)
   }
-  parseChild(component.components, componentName)
+  parseChild(component.components, vuetrolName)
   return component
 }
 
@@ -20,9 +32,9 @@ function parseChild(coms, preName) {
   if (coms) {
     Object.keys(coms).forEach(it => {
       const itPreCreated = coms[it].created || new Function()
-      const nowName =  `${preName}_${it}`
+      const nowName =  coms[it].vuetrol || `${preName}_${it}`
       coms[it].created = function() {
-        _.set(global, nowName, this)
+        setGlobal(nowName, this)
         return itPreCreated(...arguments)
       }
       parseChild(coms[it].components, nowName)
@@ -32,11 +44,10 @@ function parseChild(coms, preName) {
 
 export function controller (componentName) {
   return (component) => {
-    
     return parseComponent(component, componentName)
   }
 }
 
-window.__global = global;
+window.__vuetrol = global;
 
 export default global

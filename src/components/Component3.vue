@@ -6,6 +6,7 @@
 <script>
 export default {
   name: 'Component3',
+  vuetrol: 'cm3',
   data() {
     return{
       index: 0

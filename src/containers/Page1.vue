@@ -15,6 +15,7 @@ const Page1 = {
     Component1,
     Component2
   },
+  vuetrol: 'Page1',
   name: 'Page1',
   mounted() {
     console.log(this)
