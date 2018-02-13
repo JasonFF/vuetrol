@@ -1,10 +1,9 @@
 import _ from 'lodash'
 
-function Store() {
-
-}
-Store.prototype.get = function(str) {
-  return () => _.get(this, str)
+class Store {
+  get(str) {
+    return () => _.get(this, str)
+  }
 }
 
 const global = new Store()
